@@ -6,17 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by romario on 9/21/14.
+ * Created by romario on 9/23/14.
  */
-public class MyPicturePanel extends JPanel {
+public class PicturePanel extends JPanel {
 
 	private MyFrame frame;
 	private Form form;
 	private Graphics2D graphics2D;
 
-	public MyPicturePanel(MyFrame frame) {
+	public PicturePanel(MyFrame frame) {
 		this.frame = frame;
 		this.form = frame.getForm();
+		setBackground(Color.YELLOW);
+		setSize(200, 200);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -26,5 +28,4 @@ public class MyPicturePanel extends JPanel {
 
 		graphics2D.drawImage(form.getBufferedImage(), null, 100, 100);
 	}
-
 }

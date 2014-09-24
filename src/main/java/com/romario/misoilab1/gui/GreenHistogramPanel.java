@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class GreenHistogramPanel extends JPanel {
 
-	public GreenHistogramPanel(MyFrame frame) {
+	public GreenHistogramPanel() {
 
 	}
 }

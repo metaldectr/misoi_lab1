@@ -80,7 +80,7 @@ public final class MyControlPanel extends JPanel {
             File file = fileChooser.getSelectedFile();
             System.out.println(file);
 	          frame.getForm().setBufferedImage(openImage(file));
-	          frame.getPicturePanel().repaint();
+	          frame.getViewPanel().getPicturePanel().repaint();
           }
         }
       }

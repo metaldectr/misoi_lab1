@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class BlueHistogramPanel extends JPanel {
 
-	public BlueHistogramPanel(MyFrame frame) {
+	public BlueHistogramPanel() {
 
 	}
 }

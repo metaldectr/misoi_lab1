@@ -7,7 +7,7 @@ import javax.swing.*;
  */
 public class RedHistogramPanel extends JPanel {
 
-	public RedHistogramPanel(MyFrame frame) {
+	public RedHistogramPanel() {
 
 	}
 }
