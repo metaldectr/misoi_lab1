@@ -24,6 +24,7 @@ public final class MyControlPanel extends JPanel {
   private static final int CELL_INSETS = 4;
 
   private final JButton openFileButton = new JButton("Choose File");
+	private final JButton viewHistogram = new JButton("View Histogram");
   private final JButton convertImageButton = new JButton("Convert Image");
 
   private final JFileChooser fileChooser = new JFileChooser(new File(this.getClass()
@@ -79,12 +80,23 @@ public final class MyControlPanel extends JPanel {
           if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             System.out.println(file);
+
 	          frame.getForm().setBufferedImage(openImage(file));
+	          /*frame.getViewPanel().distributePanels();*/
+
 	          frame.getViewPanel().getPicturePanel().repaint();
           }
         }
       }
     });
+
+	  viewHistogram.addActionListener(new ActionListener() {
+		  @Override
+		  public void actionPerformed(ActionEvent e) {
+			  frame.getViewPanel().viewCharts();
+			  frame.getViewPanel().repaint();
+		  }
+	  });
 
     filterComboBox.addActionListener(new ActionListener() {
       @Override
@@ -108,7 +120,9 @@ public final class MyControlPanel extends JPanel {
 
     add(filterComboBox, new GBC(1, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
 
-    add(convertImageButton, new GBC(2, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
+	  add(viewHistogram, new GBC(2, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
+
+    add(convertImageButton, new GBC(3, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
   }
 
   private Map<String, FilterAbstractFactory> initializeFilterMap() {

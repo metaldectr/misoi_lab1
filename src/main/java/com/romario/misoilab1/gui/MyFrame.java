@@ -32,6 +32,7 @@ public final class MyFrame extends JFrame {
 		this.controlPanel = controlPanel;
 		this.viewPanel = viewPanel;
 
+
 		Container contentPane = getContentPane();
 
 		contentPane.add(controlPanel, BorderLayout.NORTH);

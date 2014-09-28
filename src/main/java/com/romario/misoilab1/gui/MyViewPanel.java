@@ -3,6 +3,7 @@ package com.romario.misoilab1.gui;
 import com.romario.misoilab1.form.Form;
 import com.romario.misoilab1.gui.gbc.GBC;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
@@ -18,55 +19,84 @@ public class MyViewPanel extends JPanel {
 	private MyFrame frame;
 	private Form form;
 	private Graphics2D graphics2D;
+	private GridBagConstraints c = new GridBagConstraints();
 
 	private PicturePanel picturePanel;
+	private RedHistogramPanel redHistogramPanel;
+	private GreenHistogramPanel greenHistogramPanel;
+	private BlueHistogramPanel blueHistogramPanel;
 
 	public MyViewPanel(MyFrame frame) {
 		this.frame = frame;
 		this.form = frame.getForm();
 		setBackground(Color.WHITE);
 
-		RedHistogramPanel redHistogramPanel = new RedHistogramPanel();
-		GreenHistogramPanel greenHistogramPanel = new GreenHistogramPanel();
-		BlueHistogramPanel blueHistogramPanel = new BlueHistogramPanel();
+		redHistogramPanel = new RedHistogramPanel(frame);
+		greenHistogramPanel = new GreenHistogramPanel(frame);
+		blueHistogramPanel = new BlueHistogramPanel(frame);
 
 		picturePanel = new PicturePanel(frame);
-    setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+
+		initializePanels();
+
+	}
+
+	private void initializePanels() {
+		setLayout(new GridBagLayout());
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 100;
 		c.weighty = 100;
-		c.gridheight = 4;
+		c.gridheight = 3;
 		add(picturePanel, c);
-
-		DefaultPieDataset d =new DefaultPieDataset();
-		d.setValue("1", 56);
-		JFreeChart j = ChartFactory.createPieChart("L", d, true, true, false);
-		JFreeChart j1 = ChartFactory.createPieChart("B", d , true,true,false);
-		ChartPanel cp = new ChartPanel(j);
-		ChartPanel cp1 = new ChartPanel(j1);
-		cp.setSize(50, 50);
-		cp1.setSize(50, 50);
-		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 1;
 		c.gridy = 0;
-		c.weightx = 100;
-		c.weighty = 100;
+		c.weightx = 50;
+		c.weighty = 50;
 		c.gridheight = 1;
-		add(cp, c);
 		c.fill = GridBagConstraints.BOTH;
+		redHistogramPanel.setBackground(Color.RED);
+		add(redHistogramPanel, c);
+
 		c.gridx = 1;
 		c.gridy = 1;
-		c.weightx = 100;
-		c.weighty = 100;
+		c.weightx = 50;
+		c.weighty = 50;
 		c.gridheight = 1;
-		add(cp1,c);
+		c.fill = GridBagConstraints.BOTH;
+		greenHistogramPanel.setBackground(Color.GREEN);
+		add(greenHistogramPanel, c);
 
-		/*contentPane.add(redHistogramPanel, new GBC(0, 4).setInsets(4).setAnchor(GridBagConstraints.FIRST_LINE_END));
-		contentPane.add(greenHistogramPanel, new GBC(1, 4).setInsets(4).setAnchor(GridBagConstraints.LINE_END));
-		contentPane.add(blueHistogramPanel, new GBC(2, 4).setInsets(4).setAnchor(GridBagConstraints.LAST_LINE_END));*/
+		c.gridx = 1;
+		c.gridy = 2;
+		c.weightx = 50;
+		c.weighty = 50;
+		c.gridheight = 1;
+		c.fill = GridBagConstraints.BOTH;
+		blueHistogramPanel.setBackground(Color.BLUE);
+		add(blueHistogramPanel, c);
+
+
+	}
+
+	public void viewCharts() {
+
+		ChartPanel chartPanel = new ChartPanel(redHistogramPanel.generateHistogram(form.getBufferedImage()));
+		chartPanel.setSize(300, 200);
+		redHistogramPanel.add(chartPanel);
+
+
+		greenHistogramPanel.add(new ChartPanel(greenHistogramPanel.generateHistogram(form.getBufferedImage())));
+
+		blueHistogramPanel.add(new ChartPanel(blueHistogramPanel.generateHistogram(form.getBufferedImage())));
+
+		/*add(new ChartPanel(redHistogramPanel.generateHistogram(form.getBufferedImage())), c);
+
+		add(new ChartPanel(greenHistogramPanel.generateHistogram(form.getBufferedImage())),c);
+
+		add(new ChartPanel(blueHistogramPanel.generateHistogram(form.getBufferedImage())),c);*/
+
 	}
 
 	public PicturePanel getPicturePanel() {
@@ -75,5 +105,29 @@ public class MyViewPanel extends JPanel {
 
 	public void setPicturePanel(PicturePanel picturePanel) {
 		this.picturePanel = picturePanel;
+	}
+
+	public RedHistogramPanel getRedHistogramPanel() {
+		return redHistogramPanel;
+	}
+
+	public void setRedHistogramPanel(RedHistogramPanel redHistogramPanel) {
+		this.redHistogramPanel = redHistogramPanel;
+	}
+
+	public GreenHistogramPanel getGreenHistogramPanel() {
+		return greenHistogramPanel;
+	}
+
+	public void setGreenHistogramPanel(GreenHistogramPanel greenHistogramPanel) {
+		this.greenHistogramPanel = greenHistogramPanel;
+	}
+
+	public BlueHistogramPanel getBlueHistogramPanel() {
+		return blueHistogramPanel;
+	}
+
+	public void setBlueHistogramPanel(BlueHistogramPanel blueHistogramPanel) {
+		this.blueHistogramPanel = blueHistogramPanel;
 	}
 }
