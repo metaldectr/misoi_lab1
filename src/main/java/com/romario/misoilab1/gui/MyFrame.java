@@ -15,7 +15,7 @@ import java.awt.*;
 public final class MyFrame extends JFrame {
 
 	private static final int DEFAULT_HEIGHT = 500;
-	private static final int DEFAULT_WIDTH = 700;
+	private static final int DEFAULT_WIDTH = 650;
 
 	private MyControlPanel controlPanel;
 	private MyViewPanel viewPanel;

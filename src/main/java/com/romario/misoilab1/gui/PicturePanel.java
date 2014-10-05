@@ -17,8 +17,6 @@ public class PicturePanel extends JPanel {
 	public PicturePanel(MyFrame frame) {
 		this.frame = frame;
 		this.form = frame.getForm();
-		setBackground(Color.YELLOW);
-		setSize(200, 200);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -26,6 +24,6 @@ public class PicturePanel extends JPanel {
 
 		graphics2D = (Graphics2D) g;
 
-		graphics2D.drawImage(form.getBufferedImage(), null, 100, 100);
+		graphics2D.drawImage(form.getBufferedImage(), 0, 0, 400, 400, this);
 	}
 }
