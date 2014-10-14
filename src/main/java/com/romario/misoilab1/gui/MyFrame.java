@@ -19,6 +19,9 @@ public final class MyFrame extends JFrame {
 
 	private MyControlPanel controlPanel;
 	private MyViewPanel viewPanel;
+	private PreparationPanel preparationPanel;
+
+	private Container contentPane = null;
 
 	private Form form = Form.getInstance();
 
@@ -33,7 +36,7 @@ public final class MyFrame extends JFrame {
 		this.viewPanel = viewPanel;
 
 
-		Container contentPane = getContentPane();
+		contentPane = super.getContentPane();
 
 		contentPane.add(controlPanel, BorderLayout.NORTH);
 		contentPane.add(viewPanel, BorderLayout.CENTER);
@@ -65,4 +68,19 @@ public final class MyFrame extends JFrame {
 		this.form = form;
 	}
 
+	public Container getContentPane() {
+		return contentPane;
+	}
+
+	public void setContentPane(Container contentPane) {
+		this.contentPane = contentPane;
+	}
+
+	public PreparationPanel getPreparationPanel() {
+		return preparationPanel;
+	}
+
+	public void setPreparationPanel(PreparationPanel preparationPanel) {
+		this.preparationPanel = preparationPanel;
+	}
 }

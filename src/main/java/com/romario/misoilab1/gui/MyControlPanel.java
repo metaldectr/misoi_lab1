@@ -1,7 +1,9 @@
 package com.romario.misoilab1.gui;
 
-import com.romario.misoilab1.factory.FilterAbstractFactory;
-import com.romario.misoilab1.factory.TestFilter1Factory;
+import com.romario.misoilab1.factory.AbstractFilterFactory;
+import com.romario.misoilab1.factory.MinMaxFilterFactory;
+import com.romario.misoilab1.factory.PreparationFilterFactory;
+import com.romario.misoilab1.filter.AbstractFilter;
 import com.romario.misoilab1.gui.gbc.GBC;
 
 import javax.imageio.ImageIO;
@@ -30,15 +32,19 @@ public final class MyControlPanel extends JPanel {
   private final JFileChooser fileChooser = new JFileChooser(new File(this.getClass()
       .getClassLoader().getResource("").getPath()));
 
-  private final String[] filters = {"Filter1", "Filter2", "Filter3"};
+  private final String[] filters = {"Preparation", "MinFilter", "MaxFilter", "MinMaxFilter"};
   private final JComboBox<String> filterComboBox = new JComboBox<String>(filters);
 
-  private final Map<String, FilterAbstractFactory> filtersMap = initializeFilterMap();
+  private final Map<String, AbstractFilterFactory> filtersMap = initializeFilterMap();
 
   private final MyFrame frame;
   private String item;
-  private FilterAbstractFactory currentFilterFactory;
+  private AbstractFilterFactory currentFilterFactory;
 
+	private static final String PREPARATION = "Preparation";
+	private static final String MIN = "MinFilter";
+	private static final String MAX = "MaxFilter";
+	private static final String MINMAX = "MinMaxFilter";
 
   public MyControlPanel(MyFrame frame) {
 
@@ -50,7 +56,7 @@ public final class MyControlPanel extends JPanel {
     initializeGUI();
     setListeners();
 
-    currentFilterFactory = filtersMap.get("Filter1");
+    currentFilterFactory = filtersMap.get(PREPARATION);
   }
 
   private void setListeners() {
@@ -81,7 +87,7 @@ public final class MyControlPanel extends JPanel {
             File file = fileChooser.getSelectedFile();
             System.out.println(file);
 
-	          frame.getForm().setBufferedImage(openImage(file));
+	          frame.getForm().setSourceBufferedImage(openImage(file));
 	          /*frame.getViewPanel().distributePanels();*/
 
 	          frame.getViewPanel().getPicturePanel().repaint();
@@ -103,6 +109,17 @@ public final class MyControlPanel extends JPanel {
       public void actionPerformed(ActionEvent e) {
         item = (String) filterComboBox.getSelectedItem();
         currentFilterFactory = filtersMap.get(item);
+	      frame.setPreparationPanel(new PreparationPanel(frame));
+        if (PREPARATION.equals(item)) {
+
+          add(frame.getPreparationPanel(),
+		          new GBC(4, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
+          frame.revalidate();
+        } else {
+					remove(frame.getPreparationPanel());
+	        frame.revalidate();
+        }
+	      
       }
     });
 
@@ -110,6 +127,20 @@ public final class MyControlPanel extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         System.out.println(currentFilterFactory.createFilter());
+
+	      BufferedImage tmpImage;
+	      AbstractFilter filter = currentFilterFactory.createFilter();
+
+	      if (PREPARATION.equals(item)) {
+					frame.getPreparationPanel().setArguments();
+	      }
+
+	      tmpImage = filter.convertImage(frame.getForm());
+	      frame.getForm().setSourceBufferedImage(tmpImage);
+	      /*frame.getForm().setResultBufferedImage(tmpImage);*/
+	      filter.viewResult(frame.getForm());
+	      frame.getViewPanel().getPicturePanel().repaint();
+
       }
     });
 
@@ -125,10 +156,12 @@ public final class MyControlPanel extends JPanel {
     add(convertImageButton, new GBC(3, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
   }
 
-  private Map<String, FilterAbstractFactory> initializeFilterMap() {
-    Map<String, FilterAbstractFactory> currentMap = new HashMap<String, FilterAbstractFactory>();
-    currentMap.put("Filter1", TestFilter1Factory.getInstance());
-
+  private Map<String, AbstractFilterFactory> initializeFilterMap() {
+    Map<String, AbstractFilterFactory> currentMap = new HashMap<String, AbstractFilterFactory>();
+    currentMap.put(PREPARATION, PreparationFilterFactory.getInstance());
+		currentMap.put(MIN, MinMaxFilterFactory.getInstance());
+	  currentMap.put(MAX, MinMaxFilterFactory.getInstance());
+	  currentMap.put(MINMAX, MinMaxFilterFactory.getInstance());
     return currentMap;
   }
 

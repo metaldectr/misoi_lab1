@@ -19,11 +19,15 @@ public class PicturePanel extends JPanel {
 		this.form = frame.getForm();
 	}
 
+	public PicturePanel() {
+
+	}
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		graphics2D = (Graphics2D) g;
 
-		graphics2D.drawImage(form.getBufferedImage(), 0, 0, 400, 400, this);
+		graphics2D.drawImage(form.getSourceBufferedImage(), 0, 0, 400, 400, this);
 	}
 }

@@ -1,12 +1,6 @@
 package com.romario.misoilab1.gui;
 
 import com.romario.misoilab1.form.Form;
-import com.romario.misoilab1.gui.gbc.GBC;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,9 +75,9 @@ public class MyViewPanel extends JPanel {
 
 	public void viewCharts() {
 
-		redHistogramPanel.buildHistogramPanel("RED", frame.getForm().getBufferedImage());
-		greenHistogramPanel.buildHistogramPanel("GREEN", frame.getForm().getBufferedImage());
-		blueHistogramPanel.buildHistogramPanel("BLUE", frame.getForm().getBufferedImage());
+		redHistogramPanel.buildHistogramPanel("RED", frame.getForm().getSourceBufferedImage());
+		greenHistogramPanel.buildHistogramPanel("GREEN", frame.getForm().getSourceBufferedImage());
+		blueHistogramPanel.buildHistogramPanel("BLUE", frame.getForm().getSourceBufferedImage());
 
 	}
 

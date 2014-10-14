@@ -8,7 +8,16 @@ import java.io.Serializable;
  */
 public class Form implements Serializable {
 
-	private BufferedImage bufferedImage;
+	private static final int MIN_VALUE_PIXEL = 0;
+	private static final int MAX_VALUE_PIXEL = 255;
+
+	private BufferedImage sourceBufferedImage;
+	private BufferedImage resultBufferedImage;
+
+	private int gMin = MIN_VALUE_PIXEL;
+	private int gMax = MAX_VALUE_PIXEL;
+	private int fMin = MIN_VALUE_PIXEL;
+	private int fMax = MAX_VALUE_PIXEL;
 
 	private static Form instance;
 
@@ -23,12 +32,52 @@ public class Form implements Serializable {
 		return instance;
 	}
 
-	public BufferedImage getBufferedImage() {
-		return bufferedImage;
+	public BufferedImage getSourceBufferedImage() {
+		return sourceBufferedImage;
 	}
 
-	public void setBufferedImage(BufferedImage bufferedImage) {
-		this.bufferedImage = bufferedImage;
+	public void setSourceBufferedImage(BufferedImage sourceBufferedImage) {
+		this.sourceBufferedImage = sourceBufferedImage;
+	}
+
+	public BufferedImage getResultBufferedImage() {
+		return resultBufferedImage;
+	}
+
+	public void setResultBufferedImage(BufferedImage resultBufferedImage) {
+		this.resultBufferedImage = resultBufferedImage;
+	}
+
+	public int getgMin() {
+		return gMin;
+	}
+
+	public void setgMin(int gMin) {
+		this.gMin = gMin;
+	}
+
+	public int getgMax() {
+		return gMax;
+	}
+
+	public void setgMax(int gMax) {
+		this.gMax = gMax;
+	}
+
+	public int getfMin() {
+		return fMin;
+	}
+
+	public void setfMin(int fMin) {
+		this.fMin = fMin;
+	}
+
+	public int getfMax() {
+		return fMax;
+	}
+
+	public void setfMax(int fMax) {
+		this.fMax = fMax;
 	}
 
 }
