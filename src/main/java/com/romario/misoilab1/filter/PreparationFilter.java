@@ -24,19 +24,18 @@ public class PreparationFilter extends AbstractFilter {
       for (int j = 0; j < sourceImage.getHeight(); j++) {
         int pix = sourceImage.getRGB(i, j);
 
-	      int red = (pix >> 16) & 0xff;
-	      int green = (pix >> 8) & 0xff;
-	      int blue = pix & 0xff;
+	      int checkPix = pix & 0xff;
+/*
 
-	      pix = (red + green + blue) / 3;
+				pix = ((255 << 16)) | ((255 << 8)) | (255);*/
 
-        if (pix < form.getfMin()) {
-          destinationImage.setRGB(i, j, form.getgMin());
+	      if (checkPix < form.getfMin()) {
+          destinationImage.setRGB(i, j, colorValue(form.getgMin()));
         } else {
-          if (pix > form.getfMax()) {
-            destinationImage.setRGB(i, j, form.getgMax());
+          if (checkPix > form.getfMax()) {
+            destinationImage.setRGB(i, j, colorValue(form.getgMax()));
           } else {
-	          destinationImage.setRGB(i, j, pix);
+	          destinationImage.setRGB(i, j, colorValue(form.getgMax()));
           }
         }
       }
@@ -50,4 +49,9 @@ public class PreparationFilter extends AbstractFilter {
 	  PicturePanel picturePanel = new PicturePanel();
 	  picturePanel.repaint();
   }
+
+	private int colorValue(int val) {
+
+		return ((val << 16)) | ((val << 8)) | (val);
+	}
 }

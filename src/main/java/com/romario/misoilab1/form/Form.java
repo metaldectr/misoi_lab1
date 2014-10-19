@@ -19,6 +19,8 @@ public class Form implements Serializable {
 	private int fMin = MIN_VALUE_PIXEL;
 	private int fMax = MAX_VALUE_PIXEL;
 
+	private String nameMethod;
+
 	private static Form instance;
 
 	private Form() {
@@ -80,4 +82,11 @@ public class Form implements Serializable {
 		this.fMax = fMax;
 	}
 
+	public String getNameMethod() {
+		return nameMethod;
+	}
+
+	public void setNameMethod(String nameMethod) {
+		this.nameMethod = nameMethod;
+	}
 }

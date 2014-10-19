@@ -116,6 +116,7 @@ public final class MyControlPanel extends JPanel {
 		          new GBC(4, 0).setInsets(CELL_INSETS).setAnchor(GridBagConstraints.WEST));
           frame.revalidate();
         } else {
+	        frame.getForm().setNameMethod(item);
 					remove(frame.getPreparationPanel());
 	        frame.revalidate();
         }
@@ -134,6 +135,7 @@ public final class MyControlPanel extends JPanel {
 	      if (PREPARATION.equals(item)) {
 					frame.getPreparationPanel().setArguments();
 	      }
+
 
 	      tmpImage = filter.convertImage(frame.getForm());
 	      frame.getForm().setSourceBufferedImage(tmpImage);
