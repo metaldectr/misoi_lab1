@@ -87,7 +87,9 @@ public final class MyControlPanel extends JPanel {
             File file = fileChooser.getSelectedFile();
             System.out.println(file);
 
-	          frame.getForm().setSourceBufferedImage(openImage(file));
+	          BufferedImage img = openImage(file);
+	          frame.getForm().setSourceBufferedImage(img);
+	          frame.getForm().setResultBufferedImage(img);
 	          /*frame.getViewPanel().distributePanels();*/
 
 	          frame.getViewPanel().getPicturePanel().repaint();
@@ -137,8 +139,8 @@ public final class MyControlPanel extends JPanel {
 	      }
 
 
-	      tmpImage = filter.convertImage(frame.getForm());
-	      frame.getForm().setSourceBufferedImage(tmpImage);
+	      frame.getForm().setResultBufferedImage(filter.convertImage(frame.getForm()));
+	      /*frame.getForm().setSourceBufferedImage(tmpImage);*/
 	      /*frame.getForm().setResultBufferedImage(tmpImage);*/
 	      filter.viewResult(frame.getForm());
 	      frame.getViewPanel().getPicturePanel().repaint();

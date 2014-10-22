@@ -35,7 +35,7 @@ public class PreparationFilter extends AbstractFilter {
           if (checkPix > form.getfMax()) {
             destinationImage.setRGB(i, j, colorValue(form.getgMax()));
           } else {
-	          destinationImage.setRGB(i, j, colorValue(form.getgMax()));
+	          destinationImage.setRGB(i, j, pix);
           }
         }
       }
